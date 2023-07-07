@@ -10,7 +10,7 @@ export const updateUser = (req, res) => {
 
     const postId = req.params.id;
     const q =
-      "UPDATE users SET `username`=?,`name`=?,`passwd`=?,`profldescr`=?,`img`=?,`covr`=? WHERE `uid` = ?";
+      "UPDATE users SET `username`=?,`name`=?,`profldescr`=?,`img`=?,`covr`=? WHERE `uid` = ?";
 
     const values = [req.body.username,req.body.name,req.body.profldescr,req.body.img,req.body.covr];
 

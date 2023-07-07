@@ -12,10 +12,10 @@ export const register = (req, res) => {
 
     //Hash the password and create a user
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
+    const hash = bcrypt.hashSync(req.body.passwd, salt);
 
-    const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)";
-    const values = [req.body.username, req.body.email, hash];
+    const q = "INSERT INTO users(`username`,`email`,`passwd`,`profldescr`) VALUES (?)";
+    const values = [req.body.username, req.body.email, hash, req.body.profldescr];
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
@@ -35,8 +35,8 @@ export const login = (req, res) => {
 
     //Check password
     const isPasswordCorrect = bcrypt.compareSync(
-      req.body.password,
-      data[0].password
+      req.body.passwd,
+      data[0].passwd
     );
 
     if (!isPasswordCorrect)
